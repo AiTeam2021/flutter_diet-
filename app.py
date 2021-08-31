@@ -15,7 +15,7 @@ app = Flask(__name__)
 def hello_world():
     print("asdkhsdkf")
     # put application's code here
-    nltk.download()
+#     nltk.download()
 
     filename = "ingredients - final (2).csv"
 
