@@ -1,15 +1,7 @@
 import os
-
-# import experta
 import pandas as pd
-# import waitress
 from flask import Flask, request
 from nltk.stem import PorterStemmer
-# import ast
-# from termcolor import colored
-# import nltk
-# import simple_colors
-# from nltk.stem.snowball import SnowballStemmer
 from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
@@ -24,7 +16,6 @@ def hello_world():
     print("asdkhsdkf")
     # put application's code here
 
-    #nltk.download()
     filename = "ingredients - final (2).csv"
 
     arr = dict(request.form)['title']
@@ -45,7 +36,7 @@ def hello_world():
         sen = sen.lower()
         return sen
 
-    # data.sort_values(by=['col1'])
+    
     df = data
     # print(type(data))
     df.loc[:, 'title'] = data.loc[:, 'title'].str.replace('[^\w\s]', '\n', regex=True)
@@ -72,8 +63,7 @@ def hello_world():
         arr[i] = edit_text(arr[i])
         arr[i] = stemSentence(arr[i])
 
-    # print(arr[0] + ' ' + arr[1])
-    # data['dishTypes'] = data['dishTypes'].astype(str)
+   
     for i in range(len(df)):
         df['title'].iloc[i] = stemSentence(data['title'].iloc[i])  # Stem every word.
         df['dishTypes'].iloc[i] = stemSentence(data['dishTypes'].iloc[i])
@@ -132,7 +122,6 @@ def hello_world():
     l = d['title'].iloc[k]
     l = l.tolist()
     print(len(l))
-    # l = l.to_json()
     json_file = {'title': l}
     print(json_file)
     return json_file
@@ -141,4 +130,3 @@ def hello_world():
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
     port = int(os.environ.get('PORT', 33507))
-    # waitress.serve(app, port=port)
